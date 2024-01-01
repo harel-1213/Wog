@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_COMPOSE_VERSION = '1.26.0'
-        DOCKER_IMAGE_NAME = 'harel/wog:latest'
+        DOCKER_IMAGE_NAME = 'harel1/wog:latest'
     }
 
      triggers {
