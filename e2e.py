@@ -1,3 +1,5 @@
+import time
+
 URL = "http://localhost:8777/"
 
 from selenium import webdriver
@@ -7,6 +9,7 @@ from selenium.webdriver.common.by import By
 def test_scores_service(URL):
     web_driver = webdriver.Chrome(service=Service('chromedriver.exe'))
     web_driver.get(URL)
+    time.sleep(3)
     score = web_driver.find_element(By.XPATH, '//*[@id="score"]').text
     web_driver.quit()
     if 0 < int(score) < 1001:
