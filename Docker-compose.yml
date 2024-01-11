@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: harel1/wog:latest
+    image: harel10/wog:latest
     ports:
       - "8777:5000"
-
