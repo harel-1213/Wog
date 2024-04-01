@@ -1,30 +1,36 @@
+
+
+import pytest
 import time
-
-URL = "http://localhost:8777/"
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-def test_scores_service(URL):
-    web_driver = webdriver.Chrome(service=Service('chromedriver.exe'))
-    web_driver.get(URL)
-    time.sleep(3)
-    score = web_driver.find_element(By.XPATH, '//*[@id="score"]').text
-    web_driver.quit()
-    if 0 < int(score) < 1001:
-        return True
-    else:
-        return False
+URL = "http://localhost:8777/"
 
+def test_scores_service():
+    # Initialize WebDriver
+    driver = webdriver.Chrome()
+    driver.get(URL)
 
-def main_function(URL):
-    if test_scores_service(URL):
+    try:
+        # Wait for page to load
+        time.sleep(4)
+
+        # Find and extract the score element
+        score_element = driver.find_element(By.XPATH, '//*[@id="score"]')
+        score = int(score_element.text)
+
+        # Check if the score is within the expected range
+        assert 0 < score < 1001, "Score is not within the expected range"
+
         print("The score is good")
-        return 0
-    else:
-        print("The score is bad")
-        return -1
+    except Exception as e:
+        print("An error occurred:", e)
+        raise
+    finally:
+        # Quit the WebDriver session
+        driver.quit()
 
-
-main_function(URL)
+if __name__ == "__main__":
+    test_scores_service()
